@@ -4,19 +4,25 @@
 # Output: dist/PhysicsQuestionBankGenerator(.exe)
 
 import os
-from PyInstaller.utils.hooks import collect_submodules
+import sys
 
 block_cipher = None
 
 # SPECPATH is the directory containing this .spec file (the project root).
-# Putting it on pathex is what lets PyInstaller find and bundle the local
-# `physics_qbank` package - without it the frozen app raises
-# "ModuleNotFoundError: No module named 'physics_qbank'".
 project_dir = SPECPATH
 
+# collect_submodules imports the package, so the project root must be importable
+# *now* - before Analysis applies pathex. Without this, running
+# `pyinstaller build.spec` from another directory makes collect_submodules
+# return [] and the package may not get bundled (ModuleNotFoundError at runtime).
+if project_dir not in sys.path:
+    sys.path.insert(0, project_dir)
+
+from PyInstaller.utils.hooks import collect_submodules
+
 # Force-collect every submodule of the package. Several are imported lazily
-# (fitz, tkinterdnd2) or conditionally, so we list them explicitly instead of
-# relying purely on import tracing.
+# (fitz, tkinterdnd2) or conditionally, so listing them is more reliable than
+# import tracing alone.
 hidden = collect_submodules('physics_qbank') + ['fitz']
 
 a = Analysis(

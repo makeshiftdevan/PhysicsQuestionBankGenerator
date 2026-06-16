@@ -90,20 +90,33 @@ python -m unittest discover -s tests
 
 ## Building the standalone executable
 
+**Recommended — one command, works from any directory:**
+
 ```bash
 pip install -r requirements.txt pyinstaller
-pyinstaller build.spec
+python build.py
 # result: dist/PhysicsQuestionBankGenerator(.exe)
+```
+
+`build.py` changes into its own folder, wipes any stale `build/`/`dist/` cache,
+puts the project on the import path, and force-collects the whole package — so
+it cannot produce the `ModuleNotFoundError` below.
+
+Equivalent manual build (must be run **from the project root**):
+
+```bash
+pyinstaller build.spec
 ```
 
 The teacher needs no Python install — just the produced executable. Build on a
 machine with standard Python (Tkinter is included with the official installers).
 
-> **If a built exe ever shows `ModuleNotFoundError: No module named
-> 'physics_qbank'`:** you are using an older spec. The current `build.spec`
-> anchors the build to its own folder (`pathex=[SPECPATH]`) and force-collects
-> the package, so a fresh `pyinstaller build.spec` fixes it. Always build with
-> the spec, not `pyinstaller main.py`.
+> **`ModuleNotFoundError: No module named 'physics_qbank'` in the built exe?**
+> The build did not bundle the package — almost always because `pyinstaller`
+> was run from another directory or reused a stale `build/` cache from an
+> earlier failed attempt. Fix: delete `build/` and `dist/` and run
+> `python build.py` (it passes `--clean` and pins all paths). Do **not** build
+> with `pyinstaller main.py`.
 
 ### Optional drag-and-drop
 
