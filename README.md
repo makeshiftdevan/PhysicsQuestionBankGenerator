@@ -96,7 +96,14 @@ pyinstaller build.spec
 # result: dist/PhysicsQuestionBankGenerator(.exe)
 ```
 
-The teacher needs no Python install — just the produced executable.
+The teacher needs no Python install — just the produced executable. Build on a
+machine with standard Python (Tkinter is included with the official installers).
+
+> **If a built exe ever shows `ModuleNotFoundError: No module named
+> 'physics_qbank'`:** you are using an older spec. The current `build.spec`
+> anchors the build to its own folder (`pathex=[SPECPATH]`) and force-collects
+> the package, so a fresh `pyinstaller build.spec` fixes it. Always build with
+> the spec, not `pyinstaller main.py`.
 
 ### Optional drag-and-drop
 
