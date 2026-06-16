@@ -1,0 +1,12 @@
+# Runtime dependency: the PDF engine.
+# PyMuPDF is chosen over pdfplumber for reliable reading order, multi-column
+# handling, and image/scanned-page detection (see physics_qbank/pdf_extract.py).
+PyMuPDF>=1.23
+
+# Build-time only (not needed to run from source). Used to make the standalone
+# executable the teacher double-clicks.
+# pyinstaller>=6.0
+
+# Optional, NOT required: enables drag-and-drop of a PDF onto the window.
+# The Browse button always works without it.
+# tkinterdnd2>=0.3
