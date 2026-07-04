@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher Tools · SkaPhysics</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Σ</text></svg>">
+</head>
+<body data-page="teacher-tools">
+  <header class="site-header" id="site-header"></header>
+
+  <!-- Soft gate: keeps students from wandering in. Not real security —
+       this is a static site — just a polite locked door. -->
+  <div class="container gate" id="gate">
+    <span class="badge">Staff only</span>
+    <h1>Teacher Tools</h1>
+    <p style="color:var(--text-muted); margin-top:0.5rem">This area is for the site admin.</p>
+    <div class="field">
+      <label for="gate-input">Passphrase</label>
+      <input type="text" id="gate-input" autocomplete="off" placeholder="Hint: the shape of s vs. t for constant acceleration">
+    </div>
+    <button class="btn primary" id="gate-btn" type="button">Enter</button>
+    <p id="gate-msg" style="color:var(--danger); font-size:0.85rem; min-height:1.4rem; margin-top:0.6rem"></p>
+  </div>
+
+  <main class="container" id="tools" hidden>
+    <div class="page-header">
+      <span class="badge">Staff only</span>
+      <h1>Teacher Tools</h1>
+      <p>Admin shortcuts, plus builders that write the copy-paste snippets for adding links and puzzles.</p>
+    </div>
+
+    <section class="tool-panel">
+      <h2>Admin links</h2>
+      <p class="hint">Edit this list in <code>data/site-data.js</code> under <code>teacherTools</code>.</p>
+      <ul class="link-list" id="admin-links"></ul>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Link Builder</h2>
+      <p class="hint">Fill this in, copy the snippet, and paste it into the unit's <code>links</code> list in <code>data/site-data.js</code>. Full instructions are at the top of that file.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="lb-label">Link label</label>
+          <input type="text" id="lb-label" placeholder="Unit 3 Guided Notes">
+        </div>
+        <div class="field">
+          <label for="lb-url">URL</label>
+          <input type="url" id="lb-url" placeholder="https://docs.google.com/...">
+        </div>
+        <div class="field">
+          <label for="lb-type">Type</label>
+          <select id="lb-type">
+            <option value="doc">Notes / handout</option>
+            <option value="video">Video</option>
+            <option value="practice">Practice / test</option>
+            <option value="sim">Simulation</option>
+            <option value="external">Other link</option>
+          </select>
+        </div>
+      </div>
+      <pre class="code-out" id="lb-out">{ label: "…", url: "…", type: "doc" },</pre>
+      <button class="btn primary" id="lb-copy" type="button" style="margin-top:0.75rem">Copy snippet</button>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Skanections Puzzle Builder</h2>
+      <p class="hint">Four groups, four words each, comma-separated. Order groups easiest → hardest. Copy the snippet into <code>data/puzzles.js</code>.</p>
+      <div class="field">
+        <label for="pb-title">Puzzle title</label>
+        <input type="text" id="pb-title" placeholder="Forces Friday">
+      </div>
+      <div id="pb-groups"></div>
+      <pre class="code-out" id="pb-out"></pre>
+      <p id="pb-warn" style="color:var(--danger); font-size:0.85rem; min-height:1.2rem"></p>
+      <button class="btn primary" id="pb-copy" type="button">Copy snippet</button>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="data/site-data.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/teacher-tools.js"></script>
+</body>
+</html>

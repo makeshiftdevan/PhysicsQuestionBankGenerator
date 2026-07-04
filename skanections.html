@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skanections · SkaPhysics</title>
+  <meta name="description" content="Skanections — the daily physics word-grouping game. Find four groups of four.">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Σ</text></svg>">
+</head>
+<body data-page="skanections">
+  <header class="site-header" id="site-header"></header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Skanections</h1>
+      <p>Find four groups of four related terms. You have four mistakes — choose wisely. A new ★ puzzle is featured each day.</p>
+    </div>
+
+    <div class="ska-wrap">
+      <div class="ska-toolbar">
+        <label for="ska-picker" style="margin:0">Puzzle</label>
+        <select id="ska-picker" aria-label="Choose a puzzle"></select>
+      </div>
+
+      <p class="ska-status" id="ska-status" role="status" aria-live="polite"></p>
+
+      <div class="ska-board" id="ska-board"></div>
+
+      <div class="ska-mistakes" aria-label="Mistakes remaining">
+        <span>Mistakes</span>
+        <span id="ska-dots"></span>
+      </div>
+
+      <div class="ska-controls">
+        <button class="btn" id="ska-shuffle" type="button">Shuffle</button>
+        <button class="btn" id="ska-deselect" type="button">Deselect all</button>
+        <button class="btn primary" id="ska-submit" type="button">Submit</button>
+      </div>
+
+      <div class="ska-endcard" id="ska-endcard" hidden>
+        <h3 id="ska-end-title"></h3>
+        <p id="ska-end-sub"></p>
+        <div class="ska-share-grid" id="ska-share-grid"></div>
+        <div class="ska-controls">
+          <button class="btn primary" id="ska-share" type="button">Copy results</button>
+          <button class="btn" id="ska-again" type="button">Play again</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <div class="ska-toast" id="ska-toast" role="status" aria-live="polite"></div>
+
+  <script src="data/site-data.js"></script>
+  <script src="data/puzzles.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/skanections.js"></script>
+</body>
+</html>
